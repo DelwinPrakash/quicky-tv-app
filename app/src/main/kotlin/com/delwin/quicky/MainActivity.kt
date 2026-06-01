@@ -1,13 +1,14 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.delwin.quicky
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,17 +17,25 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.*
+
+data class ChannelShortcut(
+    val name: String,
+    val videoUrl: String
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +44,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    colors = SurfaceDefaults.colors(containerColor = Color(0xFF0F1016))
+                    colors = SurfaceDefaults.colors(containerColor = Color(0xFF090A0F))
                 ) {
                     TvHelloScreen()
                 }
@@ -44,24 +53,31 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun TvHelloScreen() {
-    val greetings = listOf(
-        "Hello, World!",
-        "Welcome to Android TV!",
-        "Hello from Jetpack Compose!",
-        "Ready for Android OS 11!",
-        "Super Fast & Responsive!"
-    )
-    var greetingIndex by remember { mutableStateOf(0) }
+    val context = LocalContext.current
     
-    // Background gradient setup for premium TV visual depth
+    // Multi-layered visual depth for the TV background
     val bgBrush = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFF0A0B10),
-            Color(0xFF131522),
-            Color(0xFF07080B)
+            Color(0xFF06070C),
+            Color(0xFF10121E),
+            Color(0xFF040508)
+        )
+    )
+
+    val channels = listOf(
+        ChannelShortcut(
+            name = "Asianet News",
+            videoUrl = "https://www.youtube.com/watch?v=coYw-N1ES1E"
+        ),
+        ChannelShortcut(
+            name = "Shalom TV",
+            videoUrl = "https://www.youtube.com/watch?v=F3wz5J2871s"
+        ),
+        ChannelShortcut(
+            name = "Goodness TV",
+            videoUrl = "https://www.youtube.com/watch?v=l4gWq33b66k"
         )
     )
 
@@ -71,16 +87,15 @@ fun TvHelloScreen() {
             .background(bgBrush),
         contentAlignment = Alignment.Center
     ) {
-        // Glowing cyan-purple ambient backdrop light behind the card to create wow factor
+        // High-end ambient neon light behind the list container
         Box(
             modifier = Modifier
-                .size(500.dp, 250.dp)
-                .offset(y = (-30).dp)
+                .size(700.dp, 400.dp)
                 .background(
                     Brush.radialGradient(
                         colors = listOf(
-                            Color(0x2200F2FE),
-                            Color(0x0C9F5AF6),
+                            Color(0x1F00F2FE),
+                            Color(0x0800F2FE),
                             Color.Transparent
                         )
                     )
@@ -89,149 +104,125 @@ fun TvHelloScreen() {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            // App Branding Header
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(bottom = 28.dp)
-            ) {
-                // Glowing cyan neon logo indicator
-                Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .background(Color(0xFF00F2FE), shape = CircleShape)
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = "QUICKY TV • LEANBACK SYSTEM",
-                    color = Color(0xFF00F2FE),
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.5.sp
-                )
-            }
-
-            // TV Glassmorphic Focusable Greeting Card
-            val cardInteractionSource = remember { MutableInteractionSource() }
-            val isCardFocused by cardInteractionSource.collectIsFocusedAsState()
-            val cardScale by animateFloatAsState(
-                targetValue = if (isCardFocused) 1.04f else 1.0f,
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
-                ),
-                label = "cardScale"
-            )
-            val cardBorderColor by animateColorAsState(
-                targetValue = if (isCardFocused) Color(0xFF00F2FE) else Color.White.copy(alpha = 0.12f),
-                animationSpec = tween(250),
-                label = "cardBorder"
-            )
-
-            Column(
-                modifier = Modifier
-                    .scale(cardScale)
-                    .width(580.dp)
-                    .background(
-                        color = if (isCardFocused) Color(0xFF1E2132).copy(alpha = 0.85f) else Color(0xFF141622).copy(alpha = 0.65f),
-                        shape = RoundedCornerShape(28.dp)
-                    )
-                    .border(
-                        border = BorderStroke(if (isCardFocused) 2.dp else 1.dp, cardBorderColor),
-                        shape = RoundedCornerShape(28.dp)
-                    )
-                    .clickable(
-                        interactionSource = cardInteractionSource,
-                        indication = null
-                    ) {
-                        greetingIndex = (greetingIndex + 1) % greetings.size
-                    }
-                    .padding(horizontal = 40.dp, vertical = 36.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "HELLO GREETING DEVICE",
-                    color = Color.White.copy(alpha = 0.35f),
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.sp,
-                    modifier = Modifier.padding(bottom = 20.dp)
-                )
-
-                // Large Main Display text for TV 10-foot interface readability
-                Text(
-                    text = greetings[greetingIndex],
-                    color = Color.White,
-                    fontSize = 44.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 52.sp,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(32.dp))
-
-                // D-Pad remote control interactive cycle button
-                val btnInteractionSource = remember { MutableInteractionSource() }
-                val isBtnFocused by btnInteractionSource.collectIsFocusedAsState()
-                val btnScale by animateFloatAsState(
-                    targetValue = if (isBtnFocused) 1.08f else 1.0f,
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow
-                    ),
-                    label = "btnScale"
-                )
-
-                Box(
-                    modifier = Modifier
-                        .scale(btnScale)
-                        .background(
-                            brush = if (isBtnFocused) {
-                                Brush.linearGradient(listOf(Color(0xFF00F2FE), Color(0xFF4FACFE)))
-                            } else {
-                                Brush.linearGradient(listOf(Color(0xFF282B3E), Color(0xFF1E212E)))
-                            },
-                            shape = RoundedCornerShape(14.dp)
-                        )
-                        .border(
-                            border = BorderStroke(
-                                width = 1.5.dp,
-                                color = if (isBtnFocused) Color.White else Color.White.copy(alpha = 0.08f)
-                            ),
-                            shape = RoundedCornerShape(14.dp)
-                        )
-                        .clickable(
-                            interactionSource = btnInteractionSource,
-                            indication = null
-                        ) {
-                            greetingIndex = (greetingIndex + 1) % greetings.size
+            channels.forEach { channel ->
+                ChannelCard(
+                    channel = channel,
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(channel.videoUrl))
+                        try {
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            // Safe fallback
                         }
-                        .padding(horizontal = 28.dp, vertical = 14.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = if (isBtnFocused) "PRESS SELECT TO SWITCH ✦" else "CYCLE GREETING",
-                        color = if (isBtnFocused) Color(0xFF0A0B10) else Color.White.copy(alpha = 0.85f),
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.2.sp
-                    )
-                }
+                    }
+                )
             }
-
-            Spacer(modifier = Modifier.height(36.dp))
-
-            // Navigation guide helper text
-            Text(
-                text = "Use Remote D-PAD to navigate • Press Select key to swap greetings",
-                color = Color.White.copy(alpha = 0.25f),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium,
-                letterSpacing = 0.5.sp
-            )
         }
+    }
+}
+
+@Composable
+fun ChannelCard(
+    channel: ChannelShortcut,
+    onClick: () -> Unit
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+
+    // Smooth TV scale animation with a premium fluid bounce
+    val scale by animateFloatAsState(
+        targetValue = if (isFocused) 1.07f else 1.0f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ),
+        label = "cardScale"
+    )
+
+    // Animated container background color for high-end glassmorphism
+    val containerColor by animateColorAsState(
+        targetValue = if (isFocused) Color(0xFF1E2135).copy(alpha = 0.90f) else Color(0xFF141624).copy(alpha = 0.55f),
+        animationSpec = tween(250),
+        label = "containerColor"
+    )
+
+    // Glowing border gradient brushes
+    val activeBorderBrush = Brush.linearGradient(
+        colors = listOf(Color(0xFF00F2FE), Color(0xFF4FACFE))
+    )
+    val inactiveBorderBrush = Brush.linearGradient(
+        colors = listOf(Color.White.copy(alpha = 0.08f), Color.White.copy(alpha = 0.04f))
+    )
+
+    Row(
+        modifier = Modifier
+            .scale(scale)
+            .width(560.dp)
+            .background(containerColor, shape = RoundedCornerShape(24.dp))
+            .border(
+                border = BorderStroke(
+                    width = if (isFocused) 2.5.dp else 1.dp,
+                    brush = if (isFocused) activeBorderBrush else inactiveBorderBrush
+                ),
+                shape = RoundedCornerShape(24.dp)
+            )
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            )
+            .padding(horizontal = 36.dp, vertical = 26.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // High-end play indicator (Sleek inner play icon that morphs to active state)
+        Box(
+            modifier = Modifier
+                .size(46.dp)
+                .background(
+                    brush = if (isFocused) {
+                        Brush.linearGradient(listOf(Color(0xFF00F2FE), Color(0xFF4FACFE)))
+                    } else {
+                        Brush.linearGradient(listOf(Color(0xFF282B3E), Color(0xFF1E212E)))
+                    },
+                    shape = CircleShape
+                )
+                .border(
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = if (isFocused) Color.White.copy(alpha = 0.35f) else Color.White.copy(alpha = 0.08f)
+                    ),
+                    shape = CircleShape
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Canvas(
+                modifier = Modifier
+                    .size(13.dp)
+                    .offset(x = 1.dp) // Optical centering offset for play symbol
+            ) {
+                val path = Path().apply {
+                    moveTo(0f, 0f)
+                    lineTo(size.width, size.height / 2f)
+                    lineTo(0f, size.height)
+                    close()
+                }
+                drawPath(
+                    path = path,
+                    color = if (isFocused) Color(0xFF0A0B10) else Color.White.copy(alpha = 0.85f)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.width(32.dp))
+
+        Text(
+            text = channel.name,
+            color = if (isFocused) Color.White else Color.White.copy(alpha = 0.90f),
+            fontSize = 34.sp,
+            fontWeight = FontWeight.ExtraBold,
+            letterSpacing = 0.5.sp
+        )
     }
 }
