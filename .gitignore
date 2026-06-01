@@ -48,6 +48,7 @@ Desktop.ini
 *.keystore
 *.pk8
 *.pem
+key.properties
 
 # Crashlytics / Google services configs (usually kept local or secret depending on setup)
 # google-services.json
