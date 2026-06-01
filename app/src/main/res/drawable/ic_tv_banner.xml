@@ -1,0 +1,162 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Premium Background Gradient -->
+    <path
+        android:pathData="M0,0 h320 v180 h-320 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="0.0"
+                android:startY="0.0"
+                android:endX="320.0"
+                android:endY="180.0"
+                android:type="linear">
+                <item android:color="#0F1016" android:offset="0.0" />
+                <item android:color="#181A26" android:offset="0.5" />
+                <item android:color="#0B0C0E" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Decorative Modern Neon Blur Glow 1 -->
+    <path
+        android:pathData="M -20,-20 A 100,100 0, 0, 1, 150,50 A 100,100 0, 0, 1, -20,-20 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="-20"
+                android:startY="-20"
+                android:endX="150"
+                android:endY="50"
+                android:type="linear">
+                <item android:color="#1A00F2FE" android:offset="0.0" />
+                <item android:color="#00000000" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Decorative Modern Neon Blur Glow 2 -->
+    <path
+        android:pathData="M 180,130 A 120,120 0, 0, 1, 340,220 A 120,120 0, 0, 1, 180,130 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="180"
+                android:startY="130"
+                android:endX="340"
+                android:endY="220"
+                android:type="linear">
+                <item android:color="#1A9F5AF6" android:offset="0.0" />
+                <item android:color="#00000000" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Glowing Speed Line Ornaments (Representing "Quicky") -->
+    <path
+        android:pathData="M 60,110 L 260,110"
+        android:strokeWidth="1"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="60"
+                android:startY="110"
+                android:endX="260"
+                android:endY="110"
+                android:type="linear">
+                <item android:color="#0000F2FE" android:offset="0.0" />
+                <item android:color="#FF00F2FE" android:offset="0.5" />
+                <item android:color="#009F5AF6" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Quicky Logo Icon (Minimalist dynamic 'Q' styled lightning bolt) -->
+    <!-- Outer ring of 'Q' -->
+    <path
+        android:pathData="M 160,50 A 30,30 0, 1, 0, 185,73 L 195,83"
+        android:strokeWidth="5"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="130"
+                android:startY="50"
+                android:endX="195"
+                android:endY="83"
+                android:type="linear">
+                <item android:color="#FF00F2FE" android:offset="0.0" />
+                <item android:color="#FF4FACFE" android:offset="0.5" />
+                <item android:color="#FF9F5AF6" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Speed Lightning Bolt in Q's center -->
+    <path
+        android:pathData="M 162,38 L 148,58 L 158,58 L 152,78 L 168,54 L 158,54 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="148"
+                android:startY="38"
+                android:endX="168"
+                android:endY="78"
+                android:type="linear">
+                <item android:color="#FFFFEE58" android:offset="0.0" />
+                <item android:color="#FFFFB74D" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Futuristic Text styling: "QUICKY" (Geometric Paths) -->
+    <!-- Q -->
+    <path
+        android:pathData="M 96,132 A 6,6 0, 1, 0, 108,132 A 6,6 0, 1, 0, 96,132 M 106,136 L 110,140"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+    
+    <!-- U -->
+    <path
+        android:pathData="M 118,126 L 118,135 A 4,4 0, 0, 0, 126,135 L 126,126"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- I -->
+    <path
+        android:pathData="M 136,126 L 136,140"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+
+    <!-- C -->
+    <path
+        android:pathData="M 156,126 A 6,6 0, 0, 0, 146,133 A 6,6 0, 0, 0, 156,140"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+
+    <!-- K -->
+    <path
+        android:pathData="M 166,126 L 166,140 M 176,126 L 167,133 L 176,140"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Y -->
+    <path
+        android:pathData="M 184,126 L 190,133 M 196,126 L 190,133 L 190,140"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Sleek TV Accent Corner Tag -->
+    <path
+        android:pathData="M 290,0 L 320,30 L 320,0 Z"
+        android:fillColor="#FF00F2FE" />
+</vector>
