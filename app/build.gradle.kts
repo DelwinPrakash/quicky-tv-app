@@ -31,7 +31,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = rootProject.file("my-release-key.jks")
+            storeFile = rootProject.file("release.keystore")
             storePassword = keystoreProperties["STORE_PASSWORD"] as String
             keyAlias = keystoreProperties["KEY_ALIAS"] as String
             keyPassword = keystoreProperties["KEY_PASSWORD"] as String
@@ -40,6 +40,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
