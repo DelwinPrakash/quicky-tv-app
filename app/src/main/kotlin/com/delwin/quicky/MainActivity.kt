@@ -95,11 +95,11 @@ fun HomeScreen() {
             ),
             ChannelShortcut(
                 name = "Shalom TV",
-                videoUrl = "https://www.youtube.com/@ShalomTelevision/live"
+                videoUrl = "https://www.youtube.com/@shalomtelevisionlivestream/live"
             ),
             ChannelShortcut(
                 name = "Goodness TV",
-                videoUrl = "https://www.youtube.com/@GoodnessTVLive/live"
+                videoUrl = "https://www.youtube.com/@goodnessonline/live"
             ),
             ChannelShortcut(
                 name = "Manorama News",
@@ -107,11 +107,11 @@ fun HomeScreen() {
             ),
             ChannelShortcut(
                 name = "24 News",
-                videoUrl = "https://www.youtube.com/@24NewsHD/live"
+                videoUrl = "https://www.youtube.com/@24OnLive/live"
             ),
             ChannelShortcut(
                 name = "El Ruha",
-                videoUrl = "https://youtube.com/playlist?list=PLv24jd6cmGC8PaGPP64Zr9uGPSrVn_Toy"
+                videoUrl = "https://www.youtube.com/playlist?list=PLv24jd6cmGC8PaGPP64Zr9uGPSrVn_Toy"
             )
         )
     }
